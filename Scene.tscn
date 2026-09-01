@@ -1,0 +1,57 @@
+[gd_scene format=3 uid="uid://bb1sb06ue8fyd"]
+
+[ext_resource type="Shader" uid="uid://drn64mlbyv3cw" path="res://shader.gdshader" id="1_t6lng"]
+[ext_resource type="Script" uid="uid://c6eikv5351gn" path="res://panel.gd" id="2_4cvuw"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8npq6"]
+shader = ExtResource("1_t6lng")
+
+[sub_resource type="SphereMesh" id="SphereMesh_ikpwp"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_ikpwp"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_ikpwp"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_ikpwp"]
+height = 1.987793
+
+[node name="Node2D" type="Node3D" unique_id=209996726]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=792463759]
+
+[node name="Panel" type="Panel" parent="CanvasLayer" unique_id=1844890960 node_paths=PackedStringArray("camera", "object1")]
+material = SubResource("ShaderMaterial_8npq6")
+offset_right = 648.0
+offset_bottom = 648.0
+script = ExtResource("2_4cvuw")
+camera = NodePath("../../Scene/Camera")
+object1 = NodePath("../../Scene/Sphere")
+
+[node name="Scene" type="Node3D" parent="." unique_id=780885239]
+
+[node name="Sphere" type="MeshInstance3D" parent="Scene" unique_id=153551894]
+transform = Transform3D(0.505, 0, 0, 0, 0.505, 0, 0, 0, 0.505, 0, 0, 0)
+mesh = SubResource("SphereMesh_ikpwp")
+
+[node name="Camera3D" type="Camera3D" parent="Scene" unique_id=727155383]
+transform = Transform3D(-1, 2.4096984e-08, -8.403617e-08, 0, 0.9612617, 0.27563736, 8.742278e-08, 0.27563736, -0.9612617, 0, 2, -3.803732)
+
+[node name="Plane" type="MeshInstance3D" parent="Scene" unique_id=1444509648]
+transform = Transform3D(5.83, 0, 0, 0, -2.548374e-07, 5.83, 0, -5.83, -2.548374e-07, 0, -0.25, 0)
+mesh = SubResource("QuadMesh_ikpwp")
+
+[node name="Camera" type="MeshInstance3D" parent="Scene" unique_id=1251886265]
+transform = Transform3D(0.22, 0, 0, 0, 0.22, 0, 0, 0, 0.22, 0, 0, 1)
+mesh = SubResource("CapsuleMesh_ikpwp")
+
+[node name="Node3D" type="Node3D" parent="Scene/Camera" unique_id=596021061]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3539688, 0)
+
+[node name="eyes" type="MeshInstance3D" parent="Scene/Camera/Node3D" unique_id=570148512]
+transform = Transform3D(0.425, 0, 0, 0, -1.8577339e-08, 0.425, 0, -0.425, -1.8577339e-08, 0, 0.05046785, -0.6474061)
+mesh = SubResource("CylinderMesh_ikpwp")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Scene" unique_id=1189197173]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.045764, 1.2404689, 0.93392134)
+omni_range = 48.386
+omni_attenuation = 0.05
