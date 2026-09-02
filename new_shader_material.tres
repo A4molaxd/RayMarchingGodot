@@ -5,9 +5,15 @@
 [resource]
 shader = ExtResource("1_50bgh")
 shader_parameter/object1 = Vector4(0, 0, 0, 7.53)
+shader_parameter/object3 = Vector4(0, 0, 0, 0)
 shader_parameter/object21 = Vector3(0, 0, 0)
 shader_parameter/object22 = Vector3(0, 0, 0)
-shader_parameter/lightDir = Vector3(0.577, -0.57, -0.57)
+shader_parameter/sphere1 = Vector4(0, 0, 0, 0)
+shader_parameter/sphere2 = Vector4(0, 0, 0, 0)
+shader_parameter/color1 = Color(1, 0, 0.5921569, 1)
+shader_parameter/color2 = Color(0, 0.6039216, 0.60784316, 1)
+shader_parameter/backgColor = Color(0.15199637, 0.15199634, 0.15199634, 1)
+shader_parameter/lightDir = Vector3(0.502, -0.295, -0.21)
 shader_parameter/pos = Vector3(3.68, 0, 0)
 shader_parameter/dir = Vector3(1, 0, 0)
 shader_parameter/FOV = 100.0

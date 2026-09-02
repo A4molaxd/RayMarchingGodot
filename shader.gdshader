@@ -20,15 +20,22 @@ void vertex() {
 }
 
 uniform vec4 object1; // Sphere
+uniform vec4 object3; // Sphere 2
 uniform vec3 object21; // Box position
 uniform vec3 object22; // Box scale
+uniform vec4 sphere1;
+uniform vec4 sphere2;
+
+uniform vec3 color1: source_color;
+uniform vec3 color2: source_color;
+uniform vec3 backgColor: source_color;
 
 uniform vec3 lightDir;
 
 uniform vec3 pos; // = vec3(-1.0, 0.0, 0.5);
 uniform vec3 dir; // = vec3(1, 0, 0); 
 
-const float EPSILON = 0.05;
+const float EPSILON = 0.01;
 
 float smax(float a, float b){
 	return (a + b + sqrt(pow((a-b), 2.) + EPSILON))/2.;
@@ -36,18 +43,24 @@ float smax(float a, float b){
 float smin(float a, float b){
 	return -smax(-a, -b);
 }
-
-float sdfScene(vec3 p){
-	return min(smin(sdfSphere(p, object1.xyz, object1.w), sdfBox(p, object21, object22)), 10000.);
+vec4 smin(vec4 a, vec4 b){
+	return vec4(a.w<b.w?a.xyz:b.xyz, smin(a.w, b.w));
+}
+vec4 sdfScene(vec3 p){
+	return smin(smin(smin(
+		vec4(color1, sdfSphere(p, object1.xyz, object1.w)), 
+		vec4(color2, sdfSphere(p, object3.xyz, object3.w))), 
+		vec4(color1, sdfSphere(p, sphere1.xyz, sphere1.w))), 
+		vec4(color2, sdfSphere(p, sphere2.xyz, sphere2.w)));
 }
 
 vec3 calcNormalScene(vec3 p){
-	const float eps = 0.0001;
+	const float eps = 0.00001;
 	const vec2 h = vec2(eps, 0);
 	return normalize(vec3(
-		sdfScene(p+h.xyy) - sdfScene(p-h.xyy),
-		sdfScene(p+h.yxy) - sdfScene(p-h.yxy),
-		sdfScene(p+h.yyx) - sdfScene(p-h.yyx)
+		sdfScene(p+h.xyy).w - sdfScene(p-h.xyy).w,
+		sdfScene(p+h.yxy).w - sdfScene(p-h.yxy).w,
+		sdfScene(p+h.yyx).w - sdfScene(p-h.yyx).w
 	));
 }
 
@@ -55,19 +68,18 @@ float lightning(vec3 p){
 	return dot(calcNormalScene(p), lightDir);
 }
 
-float march(vec3 d, vec3 o){
+vec4 march(vec3 d, vec3 o){
 	float l = 0.;
-	for (int i = 0; i<1000; i++){
-		float minD = sdfScene(o);
+	for (int i = 0; i<10000; i++){
+		vec4 s = sdfScene(o);
+		float minD = s.w;
 		o += d*minD;
 		l += minD;
-		if (minD < .00001) return 0.1 + smoothstep(0.1, 1., lightning(o));
-		if (minD > 1000.) return 0.2;
+		if (minD < .0001) return vec4(s.xyz, 0.1 + smoothstep(0.1, 1., lightning(o)));
+		if (minD > 1000.) return vec4(backgColor, -1.);
 	}
-	return l;
+	return vec4(backgColor, l);
 }
-
-
 
 uniform float FOV: hint_range(10, 100, 5);
 uniform float v: hint_range(0.0, 3.0, 0.1);
@@ -85,10 +97,13 @@ void fragment() {
 	} else{
 		rayDir = dir + right * ((UV.x - 0.5) * aFOV) + up * ((UV.y - 0.5) * aFOV);
 	}
-	
-	float d = march(rayDir, rayPos);
-	//float c = exp(-d*0.3);
-	COLOR = vec4(vec3(d), 1.);
+	vec4 m = march(rayDir, rayPos);
+	float d = m.w;
+	if (abs(d + 1.) < 0.0001){
+		COLOR = vec4(vec3(0.2), 1.);
+	} else {
+		COLOR = vec4(m.xyz*d, 1.);
+	}
 }
 
 //void light() {

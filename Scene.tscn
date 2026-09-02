@@ -5,6 +5,8 @@
 
 [sub_resource type="SphereMesh" id="SphereMesh_ikpwp"]
 
+[sub_resource type="SphereMesh" id="SphereMesh_j2eoc"]
+
 [sub_resource type="BoxMesh" id="BoxMesh_4cvuw"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_4cvuw"]
@@ -18,23 +20,38 @@ height = 1.987793
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=792463759]
 
-[node name="Panel" type="Panel" parent="CanvasLayer" unique_id=1844890960 node_paths=PackedStringArray("camera", "object1", "object2")]
+[node name="Panel" type="Panel" parent="CanvasLayer" unique_id=1844890960 node_paths=PackedStringArray("camera", "object1", "object2", "object3", "sphere1", "sphere2")]
 material = ExtResource("1_4cvuw")
-offset_right = 648.0
-offset_bottom = 648.0
+offset_right = 1296.0
+offset_bottom = 1296.0
 script = ExtResource("2_4cvuw")
 camera = NodePath("../../Scene/Camera")
 object1 = NodePath("../../Scene/Sphere")
 object2 = NodePath("../../Scene/Box")
+object3 = NodePath("../../Scene/Sphere2")
+sphere1 = NodePath("../../Scene/Sphere3")
+sphere2 = NodePath("../../Scene/Sphere4")
 
 [node name="Scene" type="Node3D" parent="." unique_id=780885239]
 
 [node name="Sphere" type="MeshInstance3D" parent="Scene" unique_id=153551894]
-transform = Transform3D(0.32007444, 0, 0, 0, 0.32007444, 0, 0, 0, 0.32007444, -0.44, -0.046, 0.01)
+transform = Transform3D(0.32007444, 0, 0, 0, 0.32007444, 0, 0, 0, 0.32007444, 0.4160574, 0.0070791245, -0.42815465)
 mesh = SubResource("SphereMesh_ikpwp")
 
+[node name="Sphere2" type="MeshInstance3D" parent="Scene" unique_id=1600209598]
+transform = Transform3D(0.32007444, 0, 0, 0, 0.32007444, 0, 0, 0, 0.32007444, 0.42373133, 0.0271945, 0.14676954)
+mesh = SubResource("SphereMesh_j2eoc")
+
+[node name="Sphere3" type="MeshInstance3D" parent="Scene" unique_id=1284752472]
+transform = Transform3D(0.3004964, 0, 0, 0, 0.3004964, 0, 0, 0, 0.3004964, 0.4745646, 0.52191377, 0.16056836)
+mesh = SubResource("SphereMesh_j2eoc")
+
+[node name="Sphere4" type="MeshInstance3D" parent="Scene" unique_id=1380910430]
+transform = Transform3D(0.31815633, 0, 0, 0, 0.31815633, 0, 0, 0, 0.31815633, 0.42034978, 0.53728545, -0.46493196)
+mesh = SubResource("SphereMesh_j2eoc")
+
 [node name="Box" type="MeshInstance3D" parent="Scene" unique_id=1444509648]
-transform = Transform3D(0.265, 0, 0, 0, -1.1583517e-08, 0.265, 0, -0.265, -1.1583517e-08, 0.27804554, -0.035, 0)
+transform = Transform3D(0.21, 0, 0, 0, -2.928663e-08, 1.195, 0, -0.67, -5.2235112e-08, 0.15424782, 0.21045938, -0.1507768)
 mesh = SubResource("BoxMesh_4cvuw")
 
 [node name="Camera3D" type="Camera3D" parent="Scene" unique_id=727155383]

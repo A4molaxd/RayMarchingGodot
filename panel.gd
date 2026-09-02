@@ -9,6 +9,9 @@ func _ready() -> void:
 
 @export var object1: MeshInstance3D
 @export var object2: MeshInstance3D
+@export var object3: MeshInstance3D
+@export var sphere1: MeshInstance3D
+@export var sphere2: MeshInstance3D
 
 
 @onready var shader = preload("res://new_shader_material.tres")
@@ -38,7 +41,10 @@ func _process(delta: float) -> void:
 	camera.position = pos*Vector3(1, -1, 1)
 	camera.get_child(0).rotation = Vector3(-(angles.y - PI/2), angles.x, 0)
 	shader.set_shader_parameter("object1", Vector4(object1.position.x, object1.position.y, object1.position.z, object1.scale.x))
+	shader.set_shader_parameter("object3", Vector4(object3.position.x, object3.position.y, object3.position.z, object3.scale.x))
+	shader.set_shader_parameter("sphere1", Vector4(sphere1.position.x, sphere1.position.y, sphere1.position.z, sphere1.scale.x))
+	shader.set_shader_parameter("sphere2", Vector4(sphere2.position.x, sphere2.position.y, sphere2.position.z, sphere2.scale.x))
 	shader.set_shader_parameter("object21", Vector3(object2.position.x, object2.position.y, object2.position.z))
 	shader.set_shader_parameter("object22", Vector3(object2.scale.x, object2.scale.y, object2.scale.z))
-	#if Input.is_action_just_pressed("changeMode"):
-		#self.visible = not self.visible
+	if Input.is_action_just_pressed("changeMode"):
+		self.visible = not self.visible
