@@ -30,18 +30,18 @@ object2 = NodePath("../../Scene/Box")
 [node name="Scene" type="Node3D" parent="." unique_id=780885239]
 
 [node name="Sphere" type="MeshInstance3D" parent="Scene" unique_id=153551894]
-transform = Transform3D(0.32007444, 0, 0, 0, 0.32007444, 0, 0, 0, 0.32007444, 0, 0, 0)
+transform = Transform3D(0.32007444, 0, 0, 0, 0.32007444, 0, 0, 0, 0.32007444, -0.50754786, -0.045538276, 0.04)
 mesh = SubResource("SphereMesh_ikpwp")
 
 [node name="Box" type="MeshInstance3D" parent="Scene" unique_id=1444509648]
-transform = Transform3D(0.265, 0, 0, 0, -1.1583517e-08, 0.265, 0, -0.265, -1.1583517e-08, 0, 0.02, 0)
+transform = Transform3D(0.265, 0, 0, 0, -1.1583517e-08, 0.265, 0, -0.265, -1.1583517e-08, 0.27804554, -0.035, 0)
 mesh = SubResource("BoxMesh_4cvuw")
 
 [node name="Camera3D" type="Camera3D" parent="Scene" unique_id=727155383]
 transform = Transform3D(-1, 4.1620083e-08, -1.4514649e-07, 0, 0.9612617, 0.27563736, 1.509958e-07, 0.27563736, -0.9612617, 0, 2, -3.803732)
 
 [node name="Camera" type="MeshInstance3D" parent="Scene" unique_id=1251886265]
-transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 1)
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, -1)
 mesh = SubResource("SphereMesh_4cvuw")
 
 [node name="Node3D" type="Node3D" parent="Scene/Camera" unique_id=596021061]

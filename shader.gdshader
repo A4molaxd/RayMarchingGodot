@@ -23,12 +23,36 @@ uniform vec4 object1; // Sphere
 uniform vec3 object21; // Box position
 uniform vec3 object22; // Box scale
 
+uniform vec3 lightDir;
 
 uniform vec3 pos; // = vec3(-1.0, 0.0, 0.5);
 uniform vec3 dir; // = vec3(1, 0, 0); 
 
+const float EPSILON = 0.1;
+
+float smax(float a, float b){
+	return (a + b + sqrt(pow((a-b), 2.) + EPSILON))/2.;
+}
+float smin(float a, float b){
+	return -smax(-a, -b);
+}
+
 float sdfScene(vec3 p){
 	return min(min(sdfSphere(p, object1.xyz, object1.w), sdfBox(p, object21, object22)), 10000.);
+}
+
+vec3 calcNormalScene(vec3 p){
+	const float eps = 0.0001;
+	const vec2 h = vec2(eps, 0);
+	return normalize(vec3(
+		sdfScene(p+h.xyy) - sdfScene(p-h.xyy),
+		sdfScene(p+h.yxy) - sdfScene(p-h.yxy),
+		sdfScene(p+h.yyx) - sdfScene(p-h.yyx)
+	));
+}
+
+float lightning(vec3 p){
+	return dot(calcNormalScene(p), lightDir);
 }
 
 float march(vec3 d, vec3 o){
@@ -37,11 +61,14 @@ float march(vec3 d, vec3 o){
 		float minD = sdfScene(o);
 		o += d*minD;
 		l += minD;
-		if (minD < .01) return l;
-		if (minD > 1000.) return l;
+		if (minD < .001) return lightning(o);
+		if (minD > 1000.) return 10000.;
 	}
 	return l;
 }
+
+
+
 uniform float FOV: hint_range(10, 100, 5);
 uniform float v: hint_range(0.0, 3.0, 0.1);
 uniform vec3 up;
@@ -60,8 +87,8 @@ void fragment() {
 	}
 	
 	float d = march(rayDir, rayPos);
-	float c = exp(-d*1.0);
-	COLOR = vec4(vec3(c), 1.);
+	//float c = exp(-d*0.3);
+	COLOR = vec4(vec3(d), 1.);
 }
 
 //void light() {

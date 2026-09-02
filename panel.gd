@@ -13,8 +13,8 @@ func _ready() -> void:
 
 @onready var shader = preload("res://new_shader_material.tres")
 
-var pos = Vector3(0, 0, 1)
-var angles = Vector2(0, PI/2)
+var pos = Vector3(0, 0, -1)
+var angles = Vector2(PI, PI/2)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
