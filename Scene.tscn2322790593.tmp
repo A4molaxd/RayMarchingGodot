@@ -5,7 +5,7 @@
 
 [sub_resource type="SphereMesh" id="SphereMesh_ikpwp"]
 
-[sub_resource type="BoxMesh" id="BoxMesh_4cvuw"]
+[sub_resource type="QuadMesh" id="QuadMesh_ikpwp"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_ikpwp"]
 
@@ -16,30 +16,29 @@ height = 1.987793
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=792463759]
 
-[node name="Panel" type="Panel" parent="CanvasLayer" unique_id=1844890960 node_paths=PackedStringArray("camera", "object1", "object2")]
+[node name="Panel" type="Panel" parent="CanvasLayer" unique_id=1844890960 node_paths=PackedStringArray("camera", "object1")]
 material = ExtResource("1_4cvuw")
 offset_right = 648.0
 offset_bottom = 648.0
 script = ExtResource("2_4cvuw")
 camera = NodePath("../../Scene/Camera")
 object1 = NodePath("../../Scene/Sphere")
-object2 = NodePath("../../Scene/Box")
 
 [node name="Scene" type="Node3D" parent="." unique_id=780885239]
 
 [node name="Sphere" type="MeshInstance3D" parent="Scene" unique_id=153551894]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2865576, 0)
+transform = Transform3D(0.505, 0, 0, 0, 0.505, 0, 0, 0, 0.505, 0, 0, 0)
 mesh = SubResource("SphereMesh_ikpwp")
 
 [node name="Camera3D" type="Camera3D" parent="Scene" unique_id=727155383]
-transform = Transform3D(-1, 4.1620083e-08, -1.4514649e-07, 0, 0.9612617, 0.27563736, 1.509958e-07, 0.27563736, -0.9612617, 0, 2, -3.803732)
+transform = Transform3D(-1, 2.4096984e-08, -8.403617e-08, 0, 0.9612617, 0.27563736, 8.742278e-08, 0.27563736, -0.9612617, 0, 2, -3.803732)
 
-[node name="Box" type="MeshInstance3D" parent="Scene" unique_id=1444509648]
-transform = Transform3D(6, 0, 0, 0, -2.6226832e-07, 1, 0, -6, -4.371139e-08, 0, -0.867054, 6.397377e-08)
-mesh = SubResource("BoxMesh_4cvuw")
+[node name="Plane" type="MeshInstance3D" parent="Scene" unique_id=1444509648]
+transform = Transform3D(5.83, 0, 0, 0, -2.548374e-07, 5.83, 0, -5.83, -2.548374e-07, 0, -0.25, 0)
+mesh = SubResource("QuadMesh_ikpwp")
 
 [node name="Camera" type="MeshInstance3D" parent="Scene" unique_id=1251886265]
-transform = Transform3D(0.22, 0, 0, 0, 0.22, 0, 0, 0, 0.22, -0.07245493, 0.1723752, 1.1951933)
+transform = Transform3D(0.22, 0, 0, 0, 0.22, 0, 0, 0, 0.22, 0, 0, 1)
 mesh = SubResource("CapsuleMesh_ikpwp")
 
 [node name="Node3D" type="Node3D" parent="Scene/Camera" unique_id=596021061]
