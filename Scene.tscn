@@ -7,9 +7,11 @@
 
 [sub_resource type="BoxMesh" id="BoxMesh_4cvuw"]
 
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_ikpwp"]
+[sub_resource type="SphereMesh" id="SphereMesh_4cvuw"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_ikpwp"]
+top_radius = 0.578
+bottom_radius = 0.0
 height = 1.987793
 
 [node name="Node2D" type="Node3D" unique_id=209996726]
@@ -28,25 +30,25 @@ object2 = NodePath("../../Scene/Box")
 [node name="Scene" type="Node3D" parent="." unique_id=780885239]
 
 [node name="Sphere" type="MeshInstance3D" parent="Scene" unique_id=153551894]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2865576, 0)
+transform = Transform3D(0.32007444, 0, 0, 0, 0.32007444, 0, 0, 0, 0.32007444, 0, 0, 0)
 mesh = SubResource("SphereMesh_ikpwp")
+
+[node name="Box" type="MeshInstance3D" parent="Scene" unique_id=1444509648]
+transform = Transform3D(0.265, 0, 0, 0, -1.1583517e-08, 0.265, 0, -0.265, -1.1583517e-08, 0, 0.02, 0)
+mesh = SubResource("BoxMesh_4cvuw")
 
 [node name="Camera3D" type="Camera3D" parent="Scene" unique_id=727155383]
 transform = Transform3D(-1, 4.1620083e-08, -1.4514649e-07, 0, 0.9612617, 0.27563736, 1.509958e-07, 0.27563736, -0.9612617, 0, 2, -3.803732)
 
-[node name="Box" type="MeshInstance3D" parent="Scene" unique_id=1444509648]
-transform = Transform3D(6, 0, 0, 0, -2.6226832e-07, 1, 0, -6, -4.371139e-08, 0, -0.867054, 6.397377e-08)
-mesh = SubResource("BoxMesh_4cvuw")
-
 [node name="Camera" type="MeshInstance3D" parent="Scene" unique_id=1251886265]
-transform = Transform3D(0.22, 0, 0, 0, 0.22, 0, 0, 0, 0.22, -0.07245493, 0.1723752, 1.1951933)
-mesh = SubResource("CapsuleMesh_ikpwp")
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 1)
+mesh = SubResource("SphereMesh_4cvuw")
 
 [node name="Node3D" type="Node3D" parent="Scene/Camera" unique_id=596021061]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3539688, 0)
 
 [node name="eyes" type="MeshInstance3D" parent="Scene/Camera/Node3D" unique_id=570148512]
 transform = Transform3D(0.425, 0, 0, 0, -1.8577339e-08, 0.425, 0, -0.425, -1.8577339e-08, 0, 0.05046785, -0.6474061)
+lod_bias = 0.001
 mesh = SubResource("CylinderMesh_ikpwp")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="Scene" unique_id=1189197173]
