@@ -30,7 +30,7 @@ object2 = NodePath("../../Scene/Box")
 [node name="Scene" type="Node3D" parent="." unique_id=780885239]
 
 [node name="Sphere" type="MeshInstance3D" parent="Scene" unique_id=153551894]
-transform = Transform3D(0.32007444, 0, 0, 0, 0.32007444, 0, 0, 0, 0.32007444, -0.50754786, -0.045538276, 0.04)
+transform = Transform3D(0.32007444, 0, 0, 0, 0.32007444, 0, 0, 0, 0.32007444, -0.44, -0.046, 0.01)
 mesh = SubResource("SphereMesh_ikpwp")
 
 [node name="Box" type="MeshInstance3D" parent="Scene" unique_id=1444509648]

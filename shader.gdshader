@@ -28,7 +28,7 @@ uniform vec3 lightDir;
 uniform vec3 pos; // = vec3(-1.0, 0.0, 0.5);
 uniform vec3 dir; // = vec3(1, 0, 0); 
 
-const float EPSILON = 0.1;
+const float EPSILON = 0.05;
 
 float smax(float a, float b){
 	return (a + b + sqrt(pow((a-b), 2.) + EPSILON))/2.;
@@ -38,7 +38,7 @@ float smin(float a, float b){
 }
 
 float sdfScene(vec3 p){
-	return min(min(sdfSphere(p, object1.xyz, object1.w), sdfBox(p, object21, object22)), 10000.);
+	return min(smin(sdfSphere(p, object1.xyz, object1.w), sdfBox(p, object21, object22)), 10000.);
 }
 
 vec3 calcNormalScene(vec3 p){
@@ -61,8 +61,8 @@ float march(vec3 d, vec3 o){
 		float minD = sdfScene(o);
 		o += d*minD;
 		l += minD;
-		if (minD < .001) return lightning(o);
-		if (minD > 1000.) return 10000.;
+		if (minD < .00001) return 0.1 + smoothstep(0.1, 1., lightning(o));
+		if (minD > 1000.) return 0.2;
 	}
 	return l;
 }
